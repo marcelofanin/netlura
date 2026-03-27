@@ -1,0 +1,316 @@
+/* Estilo inspirado na identidade Netflix */
+:root[data-theme="dark"] {
+  /* Cor de fundo principal - preto bem escuro estilo Netflix */
+  --bg: #141414;
+  /* Cor de superfície para elementos como cards */
+  --surface: #221f1f;
+  /* Cor de texto principal - cinza claro para boa legibilidade */
+  --text: #e5e5e5;
+  /* Cor de texto secundário - cinza mais escuro para textos auxiliares */
+  --text-muted: #b3b3b3;
+  /* Vermelho Netflix - cor de destaque e marca */
+  --accent: #e50914;
+  /* Sombra profunda para criar profundidade nos cards */
+  --shadow: 0 20px 40px rgba(0, 0, 0, 0.55);
+}
+
+/* Cores para modo claro */
+:root[data-theme="light"] {
+  /* Cor de fundo principal - branco/cinza claro */
+  --bg: #f5f5f5;
+  /* Cor de superfície para elementos como cards */
+  --surface: #ffffff;
+  /* Cor de texto principal - cinza escuro para boa legibilidade */
+  --text: #1a1a1a;
+  /* Cor de texto secundário - cinza mais claro para textos auxiliares */
+  --text-muted: #666666;
+  /* Vermelho Netflix - cor de destaque e marca */
+  --accent: #e50914;
+  /* Sombra suave para criar profundidade nos cards */
+  --shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+* {
+  /* Inclui padding e border no cálculo de width/height - facilita dimensionamento */
+  box-sizing: border-box;
+}
+
+html,
+body {
+  /* Remove margens padrão do navegador */
+  margin: 0;
+  /* Remove padding padrão */
+  padding: 0;
+  /* Garante que a altura mínima seja 100% da viewport */
+  min-height: 100%;
+  /* Define a fonte principal com fallbacks para compatibilidade */
+  font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
+  /* Define a cor padrão do texto em todo o documento */
+  color: var(--text);
+  /* Transição suave ao alternar temas */
+  transition: background-color 300ms ease, color 300ms ease;
+}
+
+/* Gradiente para modo escuro */
+:root[data-theme="dark"] body {
+  /* Gradiente radial que passa do cinza claro para o preto - efeito Netflix */
+  background: radial-gradient(circle at 20% 0%, #2b2a2a 0%, var(--bg) 60%);
+}
+
+/* Fundo simples para modo claro */
+:root[data-theme="light"] body {
+  background-color: var(--bg);
+}
+
+body {
+  /* Usa flexbox para layout */
+  display: flex;
+  /* Centraliza conteúdo horizontalmente */
+  justify-content: center;
+  /* Centraliza conteúdo verticalmente */
+  align-items: center;
+  /* Espaçamento interno - 2rem = 32px */
+  padding: 2rem;
+}
+
+header {
+  /* Alinha texto ao centro */
+  text-align: center;
+  /* Espaço abaixo do header - afasta do conteúdo principal */
+  margin-bottom: 2rem;
+  /* Posição relativa para contexto de posicionamento */
+  position: relative;
+  /* Largura responsiva */
+  width: min(98vw, 900px);
+}
+
+.theme-toggle {
+  /* Remove estilos padrão do botão */
+  background: none;
+  border: none;
+  /* Tamanho do botão */
+  font-size: 1.8rem;
+  /* Cursor de interatividade */
+  cursor: pointer;
+  /* Transição suave */
+  transition: transform 200ms ease, filter 200ms ease;
+  /* Posição absoluta no canto superior direito */
+  position: absolute;
+  right: 0;
+  top: 0;
+  /* Padding para melhor área de clique */
+  padding: 0.5rem;
+}
+
+.theme-toggle:hover {
+  /* Leve rotação ao passar o mouse */
+  transform: scale(1.2) rotate(20deg);
+  /* Leve filtro para feedback visual */
+  filter: drop-shadow(0 0 5px rgba(229, 9, 20, 0.5));
+}
+
+.theme-toggle:active {
+  /* Feedback ao clicar */
+  transform: scale(0.95);
+}
+
+h1 {
+  /* Remove margem padrão do título */
+  margin: 0 0 1.5rem 0;
+  /* Tamanho responsivo: mín 1.8rem, ideal 4% da viewport, máx 2.8rem */
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  /* Cor branca pura para maior contraste */
+  color: #ffffff;
+  /* Espaçamento entre letras - dá um visual mais premium */
+  letter-spacing: 0.05em;
+  /* Sombra preta atrás do texto para criar profundidade e legibilidade */
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.75);
+  /* Centraliza o texto */
+  text-align: center;
+}
+
+main {
+  /* Largura responsiva: máximo 98% da viewport ou 900px, o que for menor */
+  width: min(98vw, 900px);
+  /* Espaço interno - 1.5rem = 24px */
+  padding: 1.5rem;
+  /* Canto arredondado para visual moderno */
+  border-radius: 1rem;
+  /* Cor de superfície que muda com o tema */
+  background-color: var(--surface);
+  /* Aplica sombra profunda para destacar o card do fundo */
+  box-shadow: var(--shadow);
+  /* Transição suave ao alternar temas */
+  transition: background-color 300ms ease, box-shadow 300ms ease;
+}
+
+/* Gradiente opcional para modo escuro */
+:root[data-theme="dark"] main {
+  background: linear-gradient(180deg, rgba(40, 40, 40, 0.95), rgba(20, 20, 20, 0.9));
+}
+
+.profiles {
+  /* Usa CSS Grid para layout em grade */
+  display: grid;
+  /* Cria colunas responsivas: mínimo 130px, se não couber quebra para próxima linha */
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  /* Espaço entre os cards - 1rem = 16px */
+  gap: 1rem;
+}
+
+.profile {
+  /* Posicionamento relativo para contexto dos filhos posicionados */
+  position: relative;
+  /* Borda sutil - cor muda com o tema */
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  /* Cantos arredondados suaves */
+  border-radius: 0.8rem;
+  /* Corta conteúdo que extravasa (importantes para imagens) */
+  overflow: hidden;
+  /* Alinha texto ao centro */
+  text-align: center;
+  /* Muda cursor para indicar interatividade */
+  cursor: pointer;
+  /* Suaviza animações: movimento, cor de borda e sombra mudam em 240ms */
+  transition: transform 240ms ease, border-color 240ms ease, box-shadow 240ms ease, background-color 300ms ease;
+}
+
+/* Fundo para modo escuro */
+:root[data-theme="dark"] .profile {
+  background: #232323;
+}
+
+/* Fundo para modo claro */
+:root[data-theme="light"] .profile {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+.profile:hover {
+  /* Move o card 3px para cima quando o mouse passa - efeito de flutuação */
+  transform: translateY(-3px);
+  /* Muda a cor da borda para vermelho Netflix quando hover */
+  border-color: rgba(229, 9, 20, 0.8);
+  /* Aumenta a sombra no hover para maior profundidade */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+}
+
+.profile img {
+  /* Faz a imagem ocupar toda a largura do container */
+  width: 100%;
+  /* Remove comportamento inline da tag img */
+  display: block;
+  /* Força proporção quadrada 1:1 */
+  aspect-ratio: 1/1;
+  /* Corta a imagem para preencher o espaço mantendo proporção */
+  object-fit: cover;
+}
+
+.profile p {
+  /* Remove margem padrão do parágrafo */
+  margin: 0;
+  /* Espaço interno: 0.9rem vertical, 0.5rem horizontal */
+  padding: 0.9rem 0.5rem;
+  /* Texto mais espesso para destaque */
+  font-weight: 600;
+  /* Usa a variável de cor de texto definida no :root */
+  color: var(--text);
+  /* Gradiente semitransparente preto - torna o texto legível sobre a imagem */
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.4));
+}
+
+footer {
+  /* Espaço acima do footer para separá-lo do conteúdo */
+  margin-top: 1.5rem;
+  /* Alinha texto ao centro */
+  text-align: center;
+  /* Usa cor de texto secundário mais escura */
+  color: var(--text-muted);
+  /* Texto pequeno para rodapé */
+  font-size: 0.9rem;
+}
+
+/* Media query para telas pequenas (smartphones) */
+@media (max-width: 420px) {
+  body {
+    /* Reduz padding em dispositivos móveis para mais espaço */
+    padding: 1rem;
+  }
+
+  header {
+    /* Reduz margem inferior para aproximar título das colunas */
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    /* Reduz tamanho da fonte para melhor responsividade em celulares */
+    font-size: 1.5rem;
+  }
+
+  .profiles {
+    /* Força duas colunas para melhor aproveitamento */
+    grid-template-columns: repeat(2, 1fr);
+    /* Reduz espaço entre perfis */
+    gap: 0.5rem;
+    /* Centraliza os elementos da grade */
+    justify-items: center;
+  }
+
+  .profile {
+    /* Reduz tamanho mínimo dos perfis para telas pequenas */
+    min-width: 100px;
+  }
+
+  .profile img {
+    /* Limita largura máxima das imagens para reduzir tamanho */
+    max-width: 80px;
+  }
+
+  .profile p {
+    font-size: 0.9rem;
+  }
+}
+
+/* Media queries para responsividade em diferentes dispositivos */
+
+/* Tablets e dispositivos médios (de 421px a 768px) */
+@media (min-width: 421px) and (max-width: 768px) {
+  body {
+    padding: 1.5rem;
+  }
+
+  main {
+    width: min(95vw, 800px);
+    padding: 1.2rem;
+  }
+
+  .profiles {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 0.8rem;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+  }
+}
+
+/* Desktops e telas grandes (acima de 768px) */
+@media (min-width: 769px) {
+  body {
+    padding: 2rem;
+  }
+
+  main {
+    width: min(98vw, 900px);
+    padding: 1.5rem;
+  }
+
+  .profiles {
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 1rem;
+  }
+
+  h1 {
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+  }
+}
